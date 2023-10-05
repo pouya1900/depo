@@ -19,8 +19,24 @@ class SellController extends Controller
 
     public function index()
     {
-        $sells = Sell::all();
-        return view('sell.index', compact('sells'));
+        $date = $this->request->input('date');
+        $user_id = $this->request->input('user');
+        $sand_id = $this->request->input('sand');
+
+        $filter = [
+            'date' => $date,
+            'user' => $user_id ? User::find($user_id) : null,
+            'sand' => $sand_id ? Sand::find($sand_id) : null,
+        ];
+
+        $sells = Sell::when($date, function ($q) use ($date) {
+            return $q->where('date', '>=', date('Y-m-d 00:00:00', $date))->where('date', '<', date('Y-m-d 00:00:00', $date + 86400));
+        })->when($user_id, function ($q) use ($user_id) {
+            return $q->where('user_id', $user_id);
+        })->when($sand_id, function ($q) use ($sand_id) {
+            return $q->where('sand_id', $sand_id);
+        })->orderBy('id', 'desc')->get();
+        return view('sell.index', compact('sells', 'filter'));
     }
 
     public function create()
@@ -126,7 +142,7 @@ class SellController extends Controller
                 "price"   => $price,
                 "total"   => $total,
                 "paid"    => $total_paid,
-                "cash"   => $paid,
+                "cash"    => $paid,
                 "balance" => $use_balance,
                 "date"    => $date,
             ]);
@@ -250,7 +266,7 @@ class SellController extends Controller
                 "price"   => $price,
                 "total"   => $total,
                 "paid"    => $total_paid,
-                "cash"   => $paid,
+                "cash"    => $paid,
                 "balance" => $use_balance,
                 "date"    => $date,
             ]);
@@ -289,7 +305,7 @@ class SellController extends Controller
             $remaining = $sell->total - $sell->paid;
 
             $sell->update([
-                "paid"  => $sell->total,
+                "paid" => $sell->total,
                 "cash" => $sell->cash + $remaining,
             ]);
 

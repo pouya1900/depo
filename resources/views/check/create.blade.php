@@ -1,5 +1,11 @@
 @extends('layouts.main')
 
+@section('head')
+    <link rel="stylesheet" href="storage/css/persian-datepicker.min.css"/>
+    <script src="storage/js/persian-date.min.js"></script>
+    <script src="storage/js/persian-datepicker.min.js"></script>
+@endsection
+
 @section('content')
 
     <div class="col-md-10">
@@ -8,17 +14,38 @@
             <div class="content_box">
                 <div class="row justify-center">
                     <div class="col-md-6 col-12">
-                        <form method="post" action="{{route('store_mine')}}">
+                        <form method="post" action="{{route('store_check')}}">
                             {{csrf_field()}}
 
                             <div class="input-group">
-                                <label for="name" class="input-group-text">نام</label>
-                                <input type="text" class="form-control" id="name" name="name">
+                                <label for="car" class="input-group-text">ماشین</label>
+                                <select id="car" name="car" class="form-control">
+                                    <option value="0">هیچکدام</option>
+                                    @foreach($users as $user)
+                                        <option data-balance="{{$user->balance}}"
+                                                value="{{$user->id}}">{{$user->car." ".$user->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="input-group">
-                                <label for="balance" class="input-group-text">اعتبار</label>
-                                <input type="number" class="form-control" id="balance" name="balance">
+                                <label for="amount" class="input-group-text">مبلغ</label>
+                                <input type="number" class="form-control" id="amount" name="amount">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="date" class="input-group-text">تاریخ</label>
+                                <input type="text" class="form-control locale-en" id="date" name="date">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="number" class="input-group-text">شماره چک</label>
+                                <input type="text" class="form-control" id="number" name="number">
+                            </div>
+
+                            <div class="input-group">
+                                <label for="bank" class="input-group-text">بانک</label>
+                                <input type="text" class="form-control" id="bank" name="bank">
                             </div>
 
                             <div class="input-group">
@@ -33,5 +60,17 @@
     </div>
 
 @endsection
+@section('script')
 
-
+    <script>
+        $("#date").pDatepicker({
+            autoClose: true,
+            format: "YYYY-MM-DD",
+            calendar: {
+                persian: {
+                    locale: 'en'
+                }
+            }
+        });
+    </script>
+@endsection

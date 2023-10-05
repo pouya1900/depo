@@ -16,7 +16,7 @@ class MineController extends Controller
 
     public function index()
     {
-        $mines = Mine::all();
+        $mines = Mine::orderBy('id', 'desc')->get();
 
         return view('mine.index', compact('mines'));
     }

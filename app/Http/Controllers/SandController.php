@@ -17,7 +17,7 @@ class SandController extends Controller
 
     public function index()
     {
-        $sands = Sand::all();
+        $sands = Sand::orderBy('id', 'desc')->get();
 
         return view('sand.index', compact('sands'));
     }

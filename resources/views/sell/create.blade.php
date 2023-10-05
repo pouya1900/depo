@@ -25,7 +25,7 @@
                                     <option value="0">هیچکدام</option>
                                     @foreach($users as $user)
                                         <option data-balance="{{$user->balance}}"
-                                                value="{{$user->id}}">{{$user->car}}</option>
+                                                value="{{$user->id}}">{{$user->car." ".$user->name}}</option>
                                     @endforeach
                                 </select>
                                 <div class="car_pluck">

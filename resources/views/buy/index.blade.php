@@ -24,6 +24,21 @@
                     </a>
                 </div>
 
+                @if ($filter["date"])
+                    <div class="table_head_line">
+                        <h5>خرید های تاریخ : {{jdate($filter["date"])->format("Y-m-d")}}</h5>
+                    </div>
+                @elseif ($filter["mine"])
+                    <div class="table_head_line">
+                        <h5>خرید های معدن : {{$filter["mine"]->name}}</h5>
+                    </div>
+                @elseif ($filter["sand"])
+                    <div class="table_head_line">
+                        <h5>خرید های شن : {{$filter["sand"]->name}}</h5>
+                    </div>
+                @endif
+
+
                 <table id="myTable" class="table table-striped">
                     <thead>
                     <tr>
@@ -42,9 +57,11 @@
                     <tbody>
                     @foreach($buys as $buy)
                         <tr>
-                            <td>{{jdate(strtotime($buy->date))->format("Y-m-d")}}</td>
-                            <td>{{$buy->sand->name}}</td>
-                            <td>{{$buy->mine->name}}</td>
+                            <td>
+                                <a href="{{route('buys',['date'=>strtotime($buy->date)])}}">{{jdate(strtotime($buy->date))->format("Y-m-d")}}</a>
+                            </td>
+                            <td><a href="{{route('buys',['sand'=>$buy->sand_id])}}">{{$buy->sand->name}}</a></td>
+                            <td><a href="{{route('buys',['mine'=>$buy->mine_id])}}">{{$buy->mine->name}}</a></td>
                             <td>{{$buy->car}}</td>
                             <td>{{$buy->real_weight}}</td>
                             <td>{{$buy->mine_weight}}</td>
@@ -58,6 +75,12 @@
                     @endforeach
                     </tbody>
                 </table>
+
+                <div class="information">
+                    <p>قیمت : {{number_format($buys->sum('total'))}}</p>
+                    <p>وزن واقعی : {{number_format($buys->sum('real_weight'))}}</p>
+                    <p>وزن تخفیف : {{number_format($buys->sum('mine_weight'))}}</p>
+                </div>
 
             </div>
 

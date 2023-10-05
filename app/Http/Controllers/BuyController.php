@@ -20,9 +20,27 @@ class BuyController extends Controller
 
     public function index()
     {
-        $buys = Buy::all();
 
-        return view('buy.index', compact('buys'));
+        $date = $this->request->input('date');
+        $mine_id = $this->request->input('mine');
+        $sand_id = $this->request->input('sand');
+
+        $filter = [
+            'date' => $date,
+            'mine' => $mine_id ? Mine::find($mine_id) : null,
+            'sand' => $sand_id ? Sand::find($sand_id) : null,
+        ];
+
+        $buys = Buy::when($date, function ($q) use ($date) {
+            return $q->where('date', '>=', date('Y-m-d 00:00:00', $date))->where('date', '<', date('Y-m-d 00:00:00', $date + 86400));
+        })->when($mine_id, function ($q) use ($mine_id) {
+            return $q->where('mine_id', $mine_id);
+        })->when($sand_id, function ($q) use ($sand_id) {
+            return $q->where('sand_id', $sand_id);
+        })->orderBy('id', 'desc')->get();
+
+
+        return view('buy.index', compact('buys', 'filter'));
     }
 
     public function create()

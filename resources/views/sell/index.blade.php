@@ -24,6 +24,20 @@
                     </a>
                 </div>
 
+                @if ($filter["date"])
+                    <div class="table_head_line">
+                        <h5>خرید های تاریخ : {{jdate($filter["date"])->format("Y-m-d")}}</h5>
+                    </div>
+                @elseif ($filter["user"])
+                    <div class="table_head_line">
+                        <h5>خرید های کاربر : {{$filter["user"]->car." ".$filter["user"]->name}}</h5>
+                    </div>
+                @elseif ($filter["sand"])
+                    <div class="table_head_line">
+                        <h5>خرید های شن : {{$filter["sand"]->name}}</h5>
+                    </div>
+                @endif
+
                 <table id="myTable" class="table table-striped">
                     <thead>
                     <tr>
@@ -44,10 +58,15 @@
                     <tbody>
                     @foreach($sells as $sell)
                         <tr>
-                            <td>{{jdate(strtotime($sell->date))->format("Y-m-d")}}</td>
-                            <td>{{$sell->sand->name}}</td>
-                            <td>{{$sell->user->car}}</td>
-                            <td>{{$sell->user->name}}</td>
+                            <td>
+                                <a href="{{route('sells',['date'=>strtotime($sell->date)])}}">{{jdate(strtotime($sell->date))->format("Y-m-d")}}</a>
+                            </td>
+                            <td><a href="{{route('sells',['sand'=>$sell->sand_id])}}">{{$sell->sand->name}}</a>
+                            </td>
+                            <td><a href="{{route('sells',['user'=>$sell->user_id])}}">{{$sell->user->car}}</a>
+                            </td>
+                            <td><a href="{{route('sells',['user'=>$sell->user_id])}}">{{$sell->user->name}}</a>
+                            </td>
                             <td>{{number_format($sell->weight)}}</td>
                             <td>{{number_format($sell->price)}}</td>
                             <td>{{number_format($sell->total)}}</td>
@@ -65,6 +84,14 @@
                     @endforeach
                     </tbody>
                 </table>
+
+                <div class="information">
+                    <p>قیمت : {{number_format($sells->sum('total'))}}</p>
+                    <p>وزن : {{number_format($sells->sum('weight'))}}</p>
+                    <p>پرداخت شده : {{number_format($sells->sum('paid'))}}</p>
+                    <p>باقی مانده : {{number_format($sells->sum('total') - $sells->sum('paid'))}}</p>
+                    <p>نقد : {{number_format($sells->sum('cash'))}}</p>
+                </div>
 
             </div>
 
