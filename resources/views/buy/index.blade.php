@@ -68,8 +68,9 @@
                             <td>{{$buy->price}}</td>
                             <td>{{$buy->total}}</td>
                             <td>{{$buy->type=="cash" ? "نقدی" : "حواله"}}</td>
-                            <td><a class="table_action_green" href="{{route('edit_buy',$buy->id)}}">ویرایش</a>
-                                <a class="table_action_red" href="{{route('delete_buy',$buy->id)}}">حدف</a>
+                            <td><p><a class="table_action_green" href="{{route('edit_buy',$buy->id)}}">ویرایش</a></p>
+                                <p><a class="table_action_red delete_button"
+                                      href="{{route('delete_buy',$buy->id)}}">حدف</a></p>
                             </td>
                         </tr>
                     @endforeach

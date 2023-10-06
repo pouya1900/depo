@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', '\App\Http\Controllers\DashboardController@home')->name('index');
+Route::get('/dashboard', '\App\Http\Controllers\DashboardController@dashboard')->name('dashboard');
 
 Route::get('/users', '\App\Http\Controllers\UserController@index')->name('users');
 Route::get('/users/create', '\App\Http\Controllers\UserController@create')->name('create_user');

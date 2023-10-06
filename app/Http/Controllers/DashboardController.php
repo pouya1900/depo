@@ -11,6 +11,11 @@ class DashboardController extends Controller
 
     public function home()
     {
+        return redirect(route('sells'));
+    }
+
+    public function dashboard()
+    {
         $now = Carbon::now();
 
         $first_of_week = Carbon::today()->startOfweek(6);

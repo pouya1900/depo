@@ -75,10 +75,10 @@
                             <td>{{number_format($sell->cash) }}</td>
                             <td>{{number_format($sell->balance)}}</td>
                             <td>
-                                <a class="table_action_green" href="{{route('complete_sell',$sell->id)}}">تسویه</a>
-                                <a class="table_action_green" href="{{route('edit_sell',$sell->id)}}">ویرایش</a>
-                                <a class="table_action_red delete_sell_button"
-                                   href="{{route('delete_sell',$sell->id)}}">حذف</a>
+                                <p><a class="table_action_green" href="{{route('complete_sell',$sell->id)}}">تسویه</a></p>
+                                <p><a class="table_action_green" href="{{route('edit_sell',$sell->id)}}">ویرایش</a></p>
+                                <p><a class="table_action_red delete_button"
+                                   href="{{route('delete_sell',$sell->id)}}">حذف</a></p>
                             </td>
                         </tr>
                     @endforeach
