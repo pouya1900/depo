@@ -1,0 +1,405 @@
+@font-face {
+    font-family: Shabnam;
+    src: url('../fonts/shabnam/normal/Shabnam.eot');
+    src: url('../fonts/shabnam/normal/Shabnam.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/shabnam/normal/Shabnam.woff') format('woff'),
+    url('../fonts/shabnam/normal/Shabnam.woff2') format('woff2'),
+    url('../fonts/shabnam/normal/Shabnam.ttf') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url('../fonts/shabnam/normal/Shabnam-Bold.eot');
+    src: url('../fonts/shabnam/normal/Shabnam-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/shabnam/normal/Shabnam-Bold.woff') format('woff'),
+    url('../fonts/shabnam/normal/Shabnam-Bold.woff2') format('woff2'),
+    url('../fonts/shabnam/normal/Shabnam-Bold.ttf') format('truetype');
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url('../fonts/shabnam/normal/Shabnam-Light.eot');
+    src: url('../fonts/shabnam/normal/Shabnam-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/shabnam/normal/Shabnam-Light.woff') format('woff'),
+    url('../fonts/shabnam/normal/Shabnam-Light.woff2') format('woff2'),
+    url('../fonts/shabnam/normal/Shabnam-Light.ttf') format('truetype');
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url('../fonts/shabnam/normal/Shabnam-Medium.eot');
+    src: url('../fonts/shabnam/normal/Shabnam-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/shabnam/normal/Shabnam-Medium.woff') format('woff'),
+    url('../fonts/shabnam/normal/Shabnam-Medium.woff2') format('woff2'),
+    url('../fonts/shabnam/normal/Shabnam-Medium.ttf') format('truetype');
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: Shabnam;
+    src: url('../fonts/shabnam/normal/Shabnam-Thin.eot');
+    src: url('../fonts/shabnam/normal/Shabnam-Thin.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/shabnam/normal/Shabnam-Thin.woff') format('woff'),
+    url('../fonts/shabnam/normal/Shabnam-Thin.woff2') format('woff2'),
+    url('../fonts/shabnam/normal/Shabnam-Thin.ttf') format('truetype');
+    font-weight: 100;
+}
+
+:root {
+    --main-color: #1db8c1;
+    --secondary-color: #f5b818;
+    --gradient-main: #1ab4a1;
+    --gradient-second: #c5b214;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: "Shabnam" !important;
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 23px;
+    direction: rtl;
+    position: relative;
+}
+
+img {
+    max-width: 100%;
+}
+
+a {
+    -webkit-transition: all 0.25s ease-in-out;
+    -moz-transition: all 0.25s ease-in-out;
+    -ms-transition: all 0.25s ease-in-out;
+    -o-transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease-in-out;
+    text-decoration: none !important;
+    color: #000;
+}
+
+a:hover {
+    text-decoration: none;
+    color: #000;
+}
+
+a:focus {
+    outline: none;
+    text-decoration: none;
+}
+
+a:active {
+    outline: none;
+    text-decoration: none;
+}
+
+.btn-primary-tdaut {
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 0px;
+    font-size: 13px;
+}
+
+.btn-primary-tdaut:hover {
+    background-color: #F44336;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.alert_red {
+    color: #ff0000;
+}
+
+.h1,
+h1 {
+    font-size: 52px;
+}
+
+.h2,
+h2 {
+    font-size: 42px;
+}
+
+.h3,
+h3 {
+    font-size: 38px;
+}
+
+.h4,
+h4 {
+    font-size: 32px;
+}
+
+.h5,
+h5 {
+    font-size: 24px;
+}
+
+.h6,
+h6 {
+    font-size: 18px;
+}
+
+video {
+    background-size: cover;
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.display-none {
+    display: none;
+}
+
+.opacity-0 {
+    opacity: 0;
+}
+
+.opacity-1 {
+    opacity: 1;
+}
+
+.padding-right-0 {
+    padding-right: 0 !important;
+}
+
+.padding-left-0 {
+    padding-left: 0 !important;
+}
+
+.margin-right-0 {
+    margin-right: 0 !important;
+}
+
+.margin-left-0 {
+    margin-left: 0 !important;
+}
+
+.background-dark {
+    background: #000;
+}
+
+
+.page_wrapper {
+    background: #eeeff1;
+    height: 100%;
+    min-height: 500px;
+}
+
+.left-to-right {
+    direction: ltr;
+}
+
+.clear_both {
+    clear: both;
+}
+
+
+.status_pending {
+    color: #0a53be;
+}
+
+.status_answered {
+    color: #0c4128;
+}
+
+.status_closed {
+    color: #aa0000;
+}
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+/*style code*/
+
+
+.main_container {
+    height: 100%;
+    background: #dadada;
+}
+
+.side_bar_container {
+    padding: 20px;
+    background: #0a58ca;
+    height: 100%;
+    position: fixed;
+    width: 16%;
+}
+
+.side_bar_container ul {
+    list-style: none;
+    color: #fff;
+    padding: 0;
+}
+
+.side_bar_container ul li {
+    padding: 5px;
+    margin-bottom: 20px;
+}
+
+.side_bar_container ul li a {
+    color: #fff;
+}
+
+.side_bar_container ul li.active {
+    background: #4a4;
+    border-radius: 10px;
+}
+
+.content_container {
+    padding: 20px;
+}
+
+.content_box {
+    padding: 20px;
+    background: #fff;
+    border-radius: 5px;
+}
+
+table.dataTable thead th, table.dataTable thead td {
+    text-align: right;
+}
+
+.add_button {
+    padding: 10px;
+    background: #0a58ca;
+    width: 150px;
+    margin-bottom: 50px;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.add_button a {
+    color: #fff;
+    width: 100%;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+.submit_button {
+    background: #0a58ca;
+    width: 200px;
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    color: #fff;
+}
+
+.car_pluck input, .car_pluck select {
+    display: inline;
+}
+
+.table_action_red {
+    padding: 5px;
+    background: #ff0000;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.table_action_green {
+    padding: 5px;
+    background: #00ff00;
+    color: #fff;
+    border-radius: 5px;
+}
+
+#total_price, #user_balance, #remaining {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.total_price_container {
+    margin: 20px 0;
+
+}
+
+.calculation_item {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.information {
+    margin: 20px;
+}
+
+.information p {
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+.table_head_line {
+    text-align: center;
+}
+
+.mobile_menu_button {
+    display: none;
+    position: fixed;
+    top: 10px;
+    right: 20px;
+    background: #000;
+    color: #fff;
+    padding: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.mobile_menu_close_button {
+    display: none;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    padding: 5px;
+    background: #000;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete_modal_content {
+    text-align: center;
+    width: 100%;
+}
+
+/*media style*/
+
+@media only screen and (max-width: 768px) {
+    .side_bar_container {
+        display: none;
+        width: 40%;
+        z-index: 999;
+    }
+
+    .mobile_menu_button {
+        display: block;
+    }
+
+    .mobile_menu_close_button {
+        display: block;
+    }
+
+    .content_container {
+        margin-top: 30px;
+    }
+
+    #myTable_wrapper {
+        overflow-x: scroll;
+    }
+
+}
