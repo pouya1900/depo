@@ -26,15 +26,15 @@
 
                 @if ($filter["date"])
                     <div class="table_head_line">
-                        <h5>خرید های تاریخ : {{jdate($filter["date"])->format("Y-m-d")}}</h5>
+                        <h5>فروش های تاریخ : {{jdate($filter["date"])->format("Y-m-d")}}</h5>
                     </div>
                 @elseif ($filter["user"])
                     <div class="table_head_line">
-                        <h5>خرید های کاربر : {{$filter["user"]->car." ".$filter["user"]->name}}</h5>
+                        <h5>فروش های کاربر : {{$filter["user"]->car." ".$filter["user"]->name}}</h5>
                     </div>
                 @elseif ($filter["sand"])
                     <div class="table_head_line">
-                        <h5>خرید های شن : {{$filter["sand"]->name}}</h5>
+                        <h5>فروش های شن : {{$filter["sand"]->name}}</h5>
                     </div>
                 @endif
 

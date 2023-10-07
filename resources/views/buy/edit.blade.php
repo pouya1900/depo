@@ -55,6 +55,11 @@
                                 <input type="radio" value="peyman" class="form-check-input" id="peyman"
                                        name="car" {{$buy->car=="peyman" ? "checked" : ""}}>
                             </div>
+                            <div class="form-check">
+                                <label for="other" class="form-check-label">ماشین غیره</label>
+                                <input type="radio" value="other" class="form-check-input" id="other"
+                                       name="car" {{$buy->car=="other" ? "checked" : ""}}>
+                            </div>
 
                             <div class="input-group">
                                 <label for="real_weight" class="input-group-text">وزن واقعی</label>

@@ -50,6 +50,10 @@
                                 <label for="peyman" class="form-check-label">ماشین پیمان</label>
                                 <input type="radio" value="peyman" class="form-check-input" id="peyman" name="car">
                             </div>
+                            <div class="form-check">
+                                <label for="other" class="form-check-label">ماشین غیره</label>
+                                <input type="radio" value="other" class="form-check-input" id="other" name="car">
+                            </div>
 
                             <div class="input-group">
                                 <label for="real_weight" class="input-group-text">وزن واقعی</label>

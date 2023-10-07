@@ -10,6 +10,8 @@
                 </a></li>
             <li class="{{url()->current()==route('users') ? "active" : ""}}"><a href="{{route('users')}}">کاربران
                 </a></li>
+            <li class="{{url()->current()==route('mines') ? "active" : ""}}"><a href="{{route('mines')}}">معدن ها
+                </a></li>
             <li class="{{url()->current()==route('sands') ? "active" : ""}}"><a href="{{route('sands')}}">شن ها
                 </a></li>
             <li class="{{url()->current()==route('buys') ? "active" : ""}}"><a href="{{route('buys')}}">لیست خرید

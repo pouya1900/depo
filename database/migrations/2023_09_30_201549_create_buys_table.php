@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->integer('mine_weight');
             $table->integer('price');
             $table->integer('total');
-            $table->enum('car', ['reza', 'peyman']);
+            $table->enum('car', ['reza', 'peyman','other']);
             $table->enum('type', ['cash', 'order']);
             $table->timestamp('date')->nullable();
             $table->timestamps();
