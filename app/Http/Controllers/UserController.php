@@ -114,7 +114,17 @@ class UserController extends Controller
             'و',
             'ه',
             'ی'];
-        return view('user.edit', compact('chars', 'user'));
+
+        $car = $user->car;
+
+        $pluck = [];
+
+        $pluck[1] = substr($car, 10, 2);
+        $pluck[2] = substr($car, 13, 2);
+        $pluck[3] = substr($car, 15, 2);
+        $pluck[4] = substr($car, 17, 3);
+
+        return view('user.edit', compact('chars', 'user', 'pluck'));
     }
 
     public function update(User $user)

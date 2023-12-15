@@ -16,7 +16,11 @@
                 </a></li>
             <li class="{{url()->current()==route('buys') ? "active" : ""}}"><a href="{{route('buys')}}">لیست خرید
                 </a></li>
-            <li class="{{url()->current()==route('checks') ? "active" : ""}}"><a href="{{route('checks')}}">لیست چک ها
+            <li class="{{url()->current()==route('checks') ? "active" : ""}}"><a href="{{route('checks')}}">لیست چک های
+                    دریافتی
+                </a></li>
+            <li class="{{url()->current()==route('send_checks') ? "active" : ""}}"><a href="{{route('send_checks')}}">لیست چک های
+                    ارسالی
                 </a></li>
         </ul>
 

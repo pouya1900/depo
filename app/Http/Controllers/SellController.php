@@ -206,7 +206,7 @@ class SellController extends Controller
             ]);
 
             $user->update([
-                'balance' => $user->balance + $sell->balance,
+                'balance' => $user->balance + $sell->balance + ($sell->total - $sell->paid),
             ]);
 
             if ($user_id = $this->request->input('car')) {

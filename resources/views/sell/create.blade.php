@@ -25,7 +25,7 @@
                                     <option value="0">هیچکدام</option>
                                     @foreach($users as $user)
                                         <option data-balance="{{$user->balance}}"
-                                                value="{{$user->id}}">{{$user->car}}</option>
+                                                value="{{$user->id}}">{{$user->car}} .... {{$user->name}}</option>
                                     @endforeach
                                 </select>
                                 <div class="car_pluck">
@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="input-group">
                                         <label for="driver_name" class="input-group-text">نام راننده</label>
-                                        <input type="number" class="form-control" id="driver_name" name="driver_name">
+                                        <input type="text" class="form-control" id="driver_name" name="driver_name">
                                     </div>
                                 </div>
 

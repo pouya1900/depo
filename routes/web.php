@@ -55,3 +55,10 @@ Route::post('/checks/store', '\App\Http\Controllers\CheckController@store')->nam
 Route::get('/checks/edit/{check}', '\App\Http\Controllers\CheckController@edit')->name('edit_check');
 Route::post('/checks/update/{check}', '\App\Http\Controllers\CheckController@update')->name('update_check');
 Route::get('/checks/delete/{check}', '\App\Http\Controllers\CheckController@delete')->name('delete_check');
+
+Route::get('/checks/send', '\App\Http\Controllers\SendCheckController@index')->name('send_checks');
+Route::get('/checks/send/create', '\App\Http\Controllers\SendCheckController@create')->name('create_send_check');
+Route::post('/checks/send/store', '\App\Http\Controllers\SendCheckController@store')->name('store_send_check');
+Route::get('/checks/send/edit/{check}', '\App\Http\Controllers\SendCheckController@edit')->name('edit_send_check');
+Route::post('/checks/send/update/{check}', '\App\Http\Controllers\SendCheckController@update')->name('update_send_check');
+Route::get('/checks/send/delete/{check}', '\App\Http\Controllers\SendCheckController@delete')->name('delete_send_check');

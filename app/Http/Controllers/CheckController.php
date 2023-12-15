@@ -18,7 +18,7 @@ class CheckController extends Controller
 
     public function index()
     {
-        $checks = Check::orderBy('id', 'desc')->get();
+        $checks = Check::orderBy('date', 'asc')->get();
 
         return view('check.index', compact('checks'));
     }

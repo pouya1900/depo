@@ -45,20 +45,10 @@
                                 </select>
                             </div>
 
-                            <div class="form-check">
-                                <label for="reza" class="form-check-label">ماشین رضا</label>
-                                <input type="radio" value="reza" class="form-check-input" id="reza"
-                                       name="car" {{$buy->car=="reza" ? "checked" : ""}}>
-                            </div>
-                            <div class="form-check">
-                                <label for="peyman" class="form-check-label">ماشین پیمان</label>
-                                <input type="radio" value="peyman" class="form-check-input" id="peyman"
-                                       name="car" {{$buy->car=="peyman" ? "checked" : ""}}>
-                            </div>
-                            <div class="form-check">
-                                <label for="other" class="form-check-label">ماشین غیره</label>
-                                <input type="radio" value="other" class="form-check-input" id="other"
-                                       name="car" {{$buy->car=="other" ? "checked" : ""}}>
+                            <div class="input-group">
+                                <label for="car" class="input-group-text">راننده</label>
+                                <input type="text" class="form-control locale-en" id="car" name="car"
+                                       value="{{$buy->car}}">
                             </div>
 
                             <div class="input-group">

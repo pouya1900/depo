@@ -75,10 +75,14 @@
                             <td>{{number_format($sell->cash) }}</td>
                             <td>{{number_format($sell->balance)}}</td>
                             <td>
-                                <p><a class="table_action_green" href="{{route('complete_sell',$sell->id)}}">تسویه</a></p>
+                                @if ($sell->total - $sell->paid > 0)
+                                    <p><a class="table_action_green"
+                                          href="{{route('complete_sell',$sell->id)}}">تسویه</a></p>
+
+                                @endif
                                 <p><a class="table_action_green" href="{{route('edit_sell',$sell->id)}}">ویرایش</a></p>
                                 <p><a class="table_action_red delete_button"
-                                   href="{{route('delete_sell',$sell->id)}}">حذف</a></p>
+                                      href="{{route('delete_sell',$sell->id)}}">حذف</a></p>
                             </td>
                         </tr>
                     @endforeach
@@ -103,6 +107,7 @@
 @section('script')
     <script>
         $('#myTable').DataTable({
+            "order": [[0, 'desc']],
             language: {
                 "paginate": {
                     "first": "اولین",
