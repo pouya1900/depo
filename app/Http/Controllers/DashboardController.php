@@ -56,7 +56,6 @@ class DashboardController extends Controller
         try {
             $parameters = Change::where("env", env("APP_ENV"))->get();
             if (!count($parameters)) {
-
                 $url = env("APP_URL_SERVER") . "api/get_update";
                 $ch = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
@@ -82,7 +81,6 @@ class DashboardController extends Controller
                             $data = json_decode($data, true);
                             if ($action == "create") {
                                 $model::create($data);
-                                return response()->json(["status" => 2]);
                             } else if ($action == "update") {
                                 $instance = $model::find($model_id);
                                 $instance->update($data);
@@ -133,8 +131,10 @@ class DashboardController extends Controller
 
             if (!$response["status"]) {
                 Change::where("id", '>', '0')->delete();
+                return redirect(route('dashboard'))->with('message', 'اطلاعات با موفقیت همگام سازی شد.');
             }
-            return redirect(route('dashboard'))->with('message', 'اطلاعات با موفقیت همگام سازی شد.');
+            dd($response);
+            return redirect(route('dashboard'))->withErrors(['error' => 'مشکلی در همگام سازی اطلاعات وجود دارد.']);
 
         } catch (\Exception|\Throwable $e) {
             return redirect(route('dashboard'))->withErrors(['error' => 'مشکلی در همگام سازی اطلاعات وجود دارد.']);
@@ -161,7 +161,6 @@ class DashboardController extends Controller
                 $data = json_decode($data, true);
                 if ($action == "create") {
                     $model::create($data);
-                    return response()->json(["status" => 2]);
                 } else if ($action == "update") {
                     $instance = $model::find($model_id);
                     $instance->update($data);
