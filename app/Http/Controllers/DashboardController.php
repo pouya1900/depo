@@ -65,7 +65,6 @@ class DashboardController extends Controller
                 $result = curl_exec($ch);
                 curl_close($ch);
                 $response = json_decode($result, true);
-                dd($result);
                 if (!$response["status"]) {
 
                     $changes = $response["changes"];
