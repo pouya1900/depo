@@ -10,6 +10,7 @@ class Change extends Model
     use HasFactory;
 
     protected $fillable=[
+        "env",
         "model_id",
         "model",
         "action",
