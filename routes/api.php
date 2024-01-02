@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/update', '\App\Http\Controllers\DashboardController@do_update')->name('do_update');
+Route::post('/get_update', '\App\Http\Controllers\DashboardController@get_update')->name('get_update');
+Route::get('/get_update/success', '\App\Http\Controllers\DashboardController@get_update_success')->name('get_update_success');
+
+

@@ -403,3 +403,20 @@ table.dataTable thead th, table.dataTable thead td {
     }
 
 }
+
+
+.side_bar_update {
+    position: absolute;
+    bottom: 20px;
+    padding: 10px 20px;
+    background: #4a4;
+    border-radius: 5px;
+    right: 25%;
+    width: 50%;
+    text-align: center;
+    color: #fff;
+}
+
+.side_bar_update a {
+    color: #fff;
+}

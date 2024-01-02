@@ -63,7 +63,7 @@ class UserController extends Controller
     public function store()
     {
         try {
-            $car = 'ایران' . $this->request->input('pluck1') . '-' . $this->request->input('pluck2') . $this->request->input('pluck3') . $this->request->input('pluck4');
+            $car = $this->request->input('pluck2') . "-" . $this->request->input('pluck4');
             $name = $this->request->input('name');
             $balance = $this->request->input('balance');
 
@@ -72,6 +72,13 @@ class UserController extends Controller
                 'name'    => $name,
                 'balance' => $balance,
             ]);
+
+            $this->save_change(null, User::class, "create", [
+                'car'     => $car,
+                'name'    => $name,
+                'balance' => $balance,
+            ]);
+
 
             return redirect(route('users'))->with('message', 'کاربر با موفقیت ثبت شد.');
         } catch (\Exception $e) {
@@ -130,7 +137,7 @@ class UserController extends Controller
     public function update(User $user)
     {
         try {
-            $car = 'ایران' . $this->request->input('pluck1') . '-' . $this->request->input('pluck2') . $this->request->input('pluck3') . $this->request->input('pluck4');
+            $car = $this->request->input('pluck2') . "-" . $this->request->input('pluck4');
             $name = $this->request->input('name');
             $balance = $this->request->input('balance');
 
@@ -139,6 +146,13 @@ class UserController extends Controller
                 'name'    => $name,
                 'balance' => $balance,
             ]);
+
+            $this->save_change($user->id, User::class, "update", [
+                'car'     => $car,
+                'name'    => $name,
+                'balance' => $balance,
+            ]);
+
 
             return redirect(route('users'))->with('message', 'کاربر با موفقیت ثبت شد.');
         } catch (\Exception $e) {

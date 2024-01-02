@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mine;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class MineController extends Controller
@@ -37,6 +38,11 @@ class MineController extends Controller
                 'balance' => $balance,
             ]);
 
+            $this->save_change(null, Mine::class, "create", [
+                'name'    => $name,
+                'balance' => $balance,
+            ]);
+
             return redirect(route('mines'))->with('message', 'معدن با موفقیت ثبت شد.');
         } catch (\Exception $e) {
             return redirect(route('mines'))->withErrors(['error' => 'مشکلی در ثبت معدن وجود دارد.']);
@@ -55,6 +61,11 @@ class MineController extends Controller
             $balance = $this->request->input('balance');
 
             $mine->update([
+                'name'    => $name,
+                'balance' => $balance,
+            ]);
+
+            $this->save_change($mine->id, Mine::class, "update", [
                 'name'    => $name,
                 'balance' => $balance,
             ]);

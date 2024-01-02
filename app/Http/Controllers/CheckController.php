@@ -49,8 +49,21 @@ class CheckController extends Controller
                 'bank'    => $bank,
             ]);
 
+            $this->save_change(null, Check::class, "create", [
+                'user_id' => $user_id,
+                'amount'  => $amount,
+                "date"    => date("Y-m-d H:i:s", strtotime($date)),
+                'number'  => $number,
+                'bank'    => $bank,
+            ]);
+
+
             $user->update([
                 "balance" => $user->balance + $amount,
+            ]);
+
+            $this->save_change($user->id, User::class, "update", [
+                "balance" => $user->balance,
             ]);
 
             return redirect(route('checks'))->with('message', 'چک با موفقیت ثبت شد.');
@@ -74,6 +87,10 @@ class CheckController extends Controller
                 "balance" => $check->user->balance - $check->amount,
             ]);
 
+            $this->save_change($check->user->id, User::class, "update", [
+                "balance" => $check->user->balance,
+            ]);
+
             $user_id = $this->request->input('car');
             $user = User::find($user_id);
             $amount = $this->request->input('amount');
@@ -92,9 +109,22 @@ class CheckController extends Controller
                 'bank'    => $bank,
             ]);
 
+            $this->save_change($check->id, Check::class, "update", [
+                'user_id' => $user_id,
+                'amount'  => $amount,
+                "date"    => date("Y-m-d H:i:s", strtotime($date)),
+                'number'  => $number,
+                'bank'    => $bank,
+            ]);
+
             $user->update([
                 "balance" => $user->balance + $amount,
             ]);
+
+            $this->save_change($user->id, User::class, "update", [
+                "balance" => $user->balance,
+            ]);
+
 
             return redirect(route('checks'))->with('message', 'چک با موفقیت اپدیت شد.');
         } catch (\Exception $e) {
@@ -109,7 +139,14 @@ class CheckController extends Controller
                 "balance" => $check->user->balance - $check->amount,
             ]);
 
+            $this->save_change($check->user->id, User::class, "update", [
+                "balance" => $check->user->balance,
+            ]);
+
             $check->delete();
+
+            $this->save_change($check->id, Check::class, "delete", null);
+
             return redirect(route('checks'))->with('message', 'چک با موفقیت حذف شد.');
         } catch (\Exception $e) {
             return redirect(route('checks'))->withErrors(['error' => 'مشکلی در حذف چک وجود دارد.']);

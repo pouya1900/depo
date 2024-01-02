@@ -71,7 +71,7 @@ class BuyController extends Controller
 
             $total = $price * $mine_weight / 1000;
 
-            Buy::create([
+            $data = [
                 'sand_id'     => $sand_id,
                 'mine_id'     => $mine_id,
                 'car'         => $car,
@@ -80,16 +80,27 @@ class BuyController extends Controller
                 'price'       => $price,
                 'type'        => $type,
                 'total'       => $total,
-                'date'        => $date,
-            ]);
+                "date"        => date("Y-m-d H:i:s", strtotime($date)),
+            ];
+            Buy::create($data);
+
+            $this->save_change(null, Buy::class, "create", $data);
 
             $sand->update([
                 "weight" => $sand->weight + $real_weight,
             ]);
 
+            $this->save_change($sand->id, Sand::class, "update", [
+                "weight" => $sand->weight,
+            ]);
+
+
             if ($type == "order") {
                 $mine->update([
                     "balance" => $mine->balance - $total,
+                ]);
+                $this->save_change($mine->id, Mine::class, "update", [
+                    "balance" => $mine->balance,
                 ]);
             }
             return redirect(route('buys'))->with('message', 'خرید با موفقیت ثبت شد.');
@@ -113,10 +124,16 @@ class BuyController extends Controller
             $sand->update([
                 "weight" => $sand->weight - $buy->real_weight,
             ]);
+            $this->save_change($sand->id, Sand::class, "update", [
+                "weight" => $sand->weight,
+            ]);
 
             if ($buy->type == "order") {
                 $mine->update([
                     "balance" => $mine->balance + $buy->total,
+                ]);
+                $this->save_change($mine->id, Mine::class, "update", [
+                    "balance" => $mine->balance,
                 ]);
             }
 
@@ -137,7 +154,7 @@ class BuyController extends Controller
 
             $total = $price * $mine_weight / 1000;
 
-            $buy->update([
+            $data = [
                 'sand_id'     => $sand_id,
                 'mine_id'     => $mine_id,
                 'car'         => $car,
@@ -146,16 +163,26 @@ class BuyController extends Controller
                 'price'       => $price,
                 'type'        => $type,
                 'total'       => $total,
-                'date'        => $date,
-            ]);
+                "date"        => date("Y-m-d H:i:s", strtotime($date)),
+            ];
+            $buy->update($data);
+            $this->save_change($buy->id, Buy::class, "update", $data);
 
             $sand->update([
                 "weight" => $sand->weight + $real_weight,
             ]);
 
+            $this->save_change($sand->id, Sand::class, "update", [
+                "weight" => $sand->weight,
+            ]);
+
+
             if ($type == "order") {
                 $mine->update([
                     "balance" => $mine->balance - $total,
+                ]);
+                $this->save_change($mine->id, Mine::class, "update", [
+                    "balance" => $mine->balance,
                 ]);
             }
             return redirect(route('buys'))->with('message', 'خرید با موفقیت اپدیت شد.');
@@ -173,12 +200,22 @@ class BuyController extends Controller
                 "weight" => $sand->weight - $buy->real_weight,
             ]);
 
+            $this->save_change($sand->id, Sand::class, "update", [
+                "weight" => $sand->weight,
+            ]);
+
             if ($buy->type == "order") {
                 $mine->update([
                     "balance" => $mine->balance + $buy->total,
                 ]);
+                $this->save_change($mine->id, Mine::class, "update", [
+                    "balance" => $mine->balance,
+                ]);
             }
             $buy->delete();
+
+            $this->save_change($buy->id, Buy::class, "delete", null);
+
             return redirect(route('buys'))->with('message', 'خرید با موفقیت حذف شد.');
         } catch (\Exception $e) {
             return redirect(route('buys'))->withErrors(['error' => 'مشکلی در حذف خرید وجود دارد.']);

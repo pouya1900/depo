@@ -13,16 +13,8 @@
                             <div class="car_pluck">
                                 <span class="">شماره پلاک</span>
                                 <div class="input-group">
-                                    <label for="pluck1" class="input-group-text">ایران</label>
-                                    <input type="text" maxlength="2" class="form-control" id="pluck1" name="pluck1">
 
                                     <input type="text" maxlength="2" class="form-control" id="pluck2" name="pluck2">
-
-                                    <select name="pluck3">
-                                        @foreach($chars as $char)
-                                            <option value="{{$char}}">{{$char}}</option>
-                                        @endforeach
-                                    </select>
 
                                     <input type="text" maxlength="3" class="form-control" id="pluck4" name="pluck4">
 

@@ -13,19 +13,10 @@
                             <div class="car_pluck">
                                 <span class="">شماره پلاک : {{$user->car}}</span>
                                 <div class="input-group">
-                                    <label for="pluck1" class="input-group-text">ایران</label>
-                                    <input type="text" maxlength="2" class="form-control" id="pluck1" name="pluck1"
-                                           value="{{$pluck[1]}}">
+
 
                                     <input type="text" maxlength="2" class="form-control" id="pluck2" name="pluck2"
                                            value="{{$pluck[2]}}">
-
-                                    <select name="pluck3">
-                                        @foreach($chars as $char)
-                                            <option
-                                                {{$pluck[1] == $char ? "selected" : ""}} value="{{$char}}">{{$char}}</option>
-                                        @endforeach
-                                    </select>
 
                                     <input type="text" maxlength="3" class="form-control" id="pluck4" name="pluck4"
                                            value="{{$pluck[4]}}">

@@ -19,10 +19,17 @@
             <li class="{{url()->current()==route('checks') ? "active" : ""}}"><a href="{{route('checks')}}">لیست چک های
                     دریافتی
                 </a></li>
-            <li class="{{url()->current()==route('send_checks') ? "active" : ""}}"><a href="{{route('send_checks')}}">لیست چک های
+            <li class="{{url()->current()==route('send_checks') ? "active" : ""}}"><a href="{{route('send_checks')}}">لیست
+                    چک های
                     ارسالی
                 </a></li>
         </ul>
+
+        @if (env("APP_ENV")=="local")
+            <div class="side_bar_update">
+                <a href="{{route("update")}}">بروزرسانی</a>
+            </div>
+        @endif
 
     </div>
 

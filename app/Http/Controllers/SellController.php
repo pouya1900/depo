@@ -87,7 +87,7 @@ class SellController extends Controller
             if ($user_id = $this->request->input('car')) {
                 $user = User::find($user_id);
             } else {
-                $car = 'ایران' . $this->request->input('pluck1') . '-' . $this->request->input('pluck2') . $this->request->input('pluck3') . $this->request->input('pluck4');
+                $car = $this->request->input('pluck2') . "-" . $this->request->input('pluck4');
 
                 if (!$user = User::where('car', $car)->first()) {
                     $user = User::create([
@@ -95,6 +95,12 @@ class SellController extends Controller
                         'name'    => $this->request->input('driver_name'),
                         'balance' => 0,
                     ]);
+                    $this->save_change(null, User::class, "create", [
+                        'car'     => $car,
+                        'name'    => $this->request->input('driver_name'),
+                        'balance' => 0,
+                    ]);
+
                 }
             }
 
@@ -129,13 +135,21 @@ class SellController extends Controller
                     'balance' => $user->balance - $remaining,
                 ]);
 
+                $this->save_change($user->id, User::class, "update", [
+                    'balance' => $user->balance,
+                ]);
+
             }
 
             $sand->update([
                 'weight' => $sand->weight - $weight,
             ]);
 
-            Sell::create([
+            $this->save_change($sand->id, Sand::class, "update", [
+                'weight' => $sand->weight,
+            ]);
+
+            $data = [
                 "sand_id" => $sand_id,
                 "user_id" => $user->id,
                 "weight"  => $weight,
@@ -144,9 +158,11 @@ class SellController extends Controller
                 "paid"    => $total_paid,
                 "cash"    => $paid,
                 "balance" => $use_balance,
-                "date"    => $date,
-            ]);
+                "date"    => date("Y-m-d H:i:s", strtotime($date)),
+            ];
+            Sell::create($data);
 
+            $this->save_change(null, Sell::class, "create", $data);
 
             return redirect(route('sells'))->with('message', 'فاکتور با موفقیت ثبت شد.');
         } catch (\Exception $e) {
@@ -205,17 +221,30 @@ class SellController extends Controller
                 'weight' => $sand->weight + $sell->weight,
             ]);
 
+            $this->save_change($sand->id, Sand::class, "update", [
+                'weight' => $sand->weight,
+            ]);
+
+
             $user->update([
                 'balance' => $user->balance + $sell->balance + ($sell->total - $sell->paid),
+            ]);
+            $this->save_change($user->id, User::class, "update", [
+                'balance' => $user->balance,
             ]);
 
             if ($user_id = $this->request->input('car')) {
                 $user = User::find($user_id);
             } else {
-                $car = 'ایران' . $this->request->input('pluck1') . '-' . $this->request->input('pluck2') . $this->request->input('pluck3') . $this->request->input('pluck4');
+                $car = $this->request->input('pluck2') . "-" . $this->request->input('pluck4');
 
                 if (!$user = User::where('car', $car)->first()) {
                     $user = User::create([
+                        'car'     => $car,
+                        'name'    => $this->request->input('driver_name'),
+                        'balance' => 0,
+                    ]);
+                    $this->save_change(null, User::class, "create", [
                         'car'     => $car,
                         'name'    => $this->request->input('driver_name'),
                         'balance' => 0,
@@ -253,13 +282,21 @@ class SellController extends Controller
                     'balance' => $user->balance - $remaining,
                 ]);
 
+                $this->save_change($user->id, User::class, "update", [
+                    'balance' => $user->balance,
+                ]);
+
             }
 
             $sand->update([
                 'weight' => $sand->weight - $weight,
             ]);
 
-            $sell->update([
+            $this->save_change($sand->id, Sand::class, "update", [
+                'weight' => $sand->weight,
+            ]);
+
+            $data = [
                 "sand_id" => $sand_id,
                 "user_id" => $user->id,
                 "weight"  => $weight,
@@ -268,9 +305,12 @@ class SellController extends Controller
                 "paid"    => $total_paid,
                 "cash"    => $paid,
                 "balance" => $use_balance,
-                "date"    => $date,
-            ]);
+                "date"    => date("Y-m-d H:i:s", strtotime($date)),
+            ];
 
+            $sell->update($data);
+
+            $this->save_change($sell->id, Sell::class, "update", $data);
 
             return redirect(route('sells'))->with('message', 'فاکتور با موفقیت اپدیت شد.');
         } catch (\Exception $e) {
@@ -287,12 +327,20 @@ class SellController extends Controller
             $sand->update([
                 'weight' => $sand->weight + $sell->weight,
             ]);
+            $this->save_change($sand->id, Sand::class, "update", [
+                'weight' => $sand->weight,
+            ]);
 
             $user->update([
                 'balance' => $user->balance + $sell->balance,
             ]);
+            $this->save_change($user->id, User::class, "update", [
+                'balance' => $user->balance,
+            ]);
 
             $sell->delete();
+            $this->save_change($sell->id, Sell::class, "delete", null);
+
             return redirect(route('sells'))->with('message', 'فاکتور با موفقیت حذف شد.');
         } catch (\Exception $e) {
             return redirect(route('sells'))->withErrors(['error' => 'مشکلی در حذف فاکتور وجود دارد.']);
@@ -309,9 +357,20 @@ class SellController extends Controller
                 "cash" => $sell->cash + $remaining,
             ]);
 
+            $this->save_change($sell->id, Sell::class, "update", [
+                "paid" => $sell->total,
+                "cash" => $sell->cash,
+            ]);
+
+
             $sell->user->update([
                 "balance" => $sell->user->balance + $remaining,
             ]);
+
+            $this->save_change($sell->user->id, User::class, "update", [
+                "balance" => $sell->user->balance,
+            ]);
+
             return redirect(route('sells'))->with('message', 'فاکتور با موفقیت پرداخت شد.');
         } catch (\Exception $e) {
             return redirect(route('sells'))->withErrors(['error' => 'مشکلی در پرداخت فاکتور وجود دارد.']);

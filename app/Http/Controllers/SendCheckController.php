@@ -49,6 +49,15 @@ class SendCheckController extends Controller
                 'bank'      => $bank,
             ]);
 
+            $this->save_change(null, SendCheck::class, "create", [
+                'user_name' => $user_name,
+                'own_name'  => $own_name,
+                'amount'    => $amount,
+                "date"      => date("Y-m-d H:i:s", strtotime($date)),
+                'number'    => $number,
+                'bank'      => $bank,
+            ]);
+
             return redirect(route('send_checks'))->with('message', 'چک با موفقیت ثبت شد.');
         } catch (\Exception $e) {
             return redirect(route('send_checks'))->withErrors(['error' => 'مشکلی در ثبت چک وجود دارد.']);
@@ -81,6 +90,15 @@ class SendCheckController extends Controller
                 'bank'      => $bank,
             ]);
 
+            $this->save_change($check->id, SendCheck::class, "update", [
+                'user_name' => $user_name,
+                'own_name'  => $own_name,
+                'amount'    => $amount,
+                "date"      => date("Y-m-d H:i:s", strtotime($date)),
+                'number'    => $number,
+                'bank'      => $bank,
+            ]);
+
             return redirect(route('send_checks'))->with('message', 'چک با موفقیت اپدیت شد.');
         } catch (\Exception $e) {
             return redirect(route('send_checks'))->withErrors(['error' => 'مشکلی در اپدیت چک وجود دارد.']);
@@ -92,6 +110,9 @@ class SendCheckController extends Controller
         try {
 
             $check->delete();
+
+            $this->save_change($check->id, SendCheck::class, "delete", null);
+
             return redirect(route('send_checks'))->with('message', 'چک با موفقیت حذف شد.');
         } catch (\Exception $e) {
             return redirect(route('send_checks'))->withErrors(['error' => 'مشکلی در حذف چک وجود دارد.']);

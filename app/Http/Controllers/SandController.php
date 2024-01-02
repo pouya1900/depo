@@ -39,7 +39,11 @@ class SandController extends Controller
                 'weight' => $weight,
                 'price'  => $price,
             ]);
-
+            $this->save_change(null, Sand::class, "create", [
+                'name'   => $name,
+                'weight' => $weight,
+                'price'  => $price,
+            ]);
             return redirect(route('sands'))->with('message', 'شن با موفقیت ثبت شد.');
         } catch (\Exception $e) {
             return redirect(route('sands'))->withErrors(['error' => 'مشکلی در ثبت شن وجود دارد.']);
@@ -59,6 +63,12 @@ class SandController extends Controller
             $weight = $this->request->input('weight');
 
             $sand->update([
+                'name'   => $name,
+                'weight' => $weight,
+                'price'  => $price,
+            ]);
+
+            $this->save_change($sand->id, Sand::class, "update", [
                 'name'   => $name,
                 'weight' => $weight,
                 'price'  => $price,
