@@ -65,7 +65,7 @@ class DashboardController extends Controller
                 $result = curl_exec($ch);
                 curl_close($ch);
                 $response = json_decode($result, true);
-
+                dd($result);
                 if (!$response["status"]) {
 
                     $changes = $response["changes"];
@@ -133,7 +133,6 @@ class DashboardController extends Controller
                 Change::where("id", '>', '0')->delete();
                 return redirect(route('dashboard'))->with('message', 'اطلاعات با موفقیت همگام سازی شد.');
             }
-            dd($response);
             return redirect(route('dashboard'))->withErrors(['error' => 'مشکلی در همگام سازی اطلاعات وجود دارد.']);
 
         } catch (\Exception|\Throwable $e) {
@@ -178,7 +177,7 @@ class DashboardController extends Controller
         }
     }
 
-    public function getUpdate()
+    public function get_update()
     {
         try {
             $changes = Change::where("env", env("APP_ENV"))->get();
