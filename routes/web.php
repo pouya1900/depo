@@ -63,3 +63,19 @@ Route::post('/checks/send/store', '\App\Http\Controllers\SendCheckController@sto
 Route::get('/checks/send/edit/{check}', '\App\Http\Controllers\SendCheckController@edit')->name('edit_send_check');
 Route::post('/checks/send/update/{check}', '\App\Http\Controllers\SendCheckController@update')->name('update_send_check');
 Route::get('/checks/send/delete/{check}', '\App\Http\Controllers\SendCheckController@delete')->name('delete_send_check');
+
+Route::get('/deposits', '\App\Http\Controllers\DepositController@index')->name('deposits');
+Route::get('/deposits/create', '\App\Http\Controllers\DepositController@create')->name('create_deposit');
+Route::post('/deposits/store', '\App\Http\Controllers\DepositController@store')->name('store_deposit');
+Route::get('/deposits/edit/{deposit}', '\App\Http\Controllers\DepositController@edit')->name('edit_deposit');
+Route::post('/deposits/update/{deposit}', '\App\Http\Controllers\DepositController@update')->name('update_deposit');
+Route::get('/deposits/delete/{deposit}', '\App\Http\Controllers\DepositController@delete')->name('delete_deposit');
+
+Route::get('/members', '\App\Http\Controllers\MemberController@index')->name('members');
+Route::get('/members/create', '\App\Http\Controllers\MemberController@create')->name('create_member');
+Route::post('/members/store', '\App\Http\Controllers\MemberController@store')->name('store_member');
+Route::get('/members/edit/{member}', '\App\Http\Controllers\MemberController@edit')->name('edit_member');
+Route::post('/members/update/{member}', '\App\Http\Controllers\MemberController@update')->name('update_member');
+Route::get('/members/delete/{member}', '\App\Http\Controllers\MemberController@delete')->name('delete_member');
+Route::get('/members/show/{member}', '\App\Http\Controllers\MemberController@show')->name('show_member');
+

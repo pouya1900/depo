@@ -23,6 +23,12 @@
                     چک های
                     ارسالی
                 </a></li>
+            <li class="{{url()->current()==route('deposits') ? "active" : ""}}"><a href="{{route('deposits')}}">لیست
+                    واریزی ها
+                </a></li>
+            <li class="{{url()->current()==route('members') ? "active" : ""}}"><a href="{{route('members')}}">لیست
+                    اعضا
+                </a></li>
         </ul>
 
         @if (env("APP_ENV")=="local")
