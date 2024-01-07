@@ -86,8 +86,11 @@ class MemberController extends Controller
 
     public function show(Member $member)
     {
-        $date1 = Jalalian::fromFormat('Y-m-d', $this->request->input("date1"))->toCarbon();
-        $date2 = Jalalian::fromFormat('Y-m-d', $this->request->input("date2"))->toCarbon();
+
+        $date1 = $this->request->input("date1");
+        $date2 = $this->request->input("date2");
+        $date1 = $date1 ? Jalalian::fromFormat('Y-m-d', $date1)->toCarbon() : "";
+        $date2 = $date2 ? Jalalian::fromFormat('Y-m-d', $date2)->toCarbon() : "";
 
         $deposits = $member->deposits()->when($date1 && $date2, function ($q) use ($date1, $date2) {
             return $q->where("date", ">=", $date1)->where("date", "<=", $date2);
